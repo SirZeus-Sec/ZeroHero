@@ -41,10 +41,9 @@ jobs:
           SCAN_RESULTS=""
           SECRET_FOUND=false
           
-          for file in $CHANGED_FILES; do
-            if [[ -f "$file" ]]; then
+
               echo "Scanning $file..."
-              RESULT=$(trufflehog --regex --entropy=True "$file" 2>&1 || true)
+              RESULT=$(trufflehog filesystem "$CHANGED_FILES" 2>&1 || true)
               echo "$RESULT"
               SCAN_RESULTS+="$RESULT"$'\n\n'
               
@@ -52,8 +51,7 @@ jobs:
                   SECRET_FOUND=true
                   EXIT_CODE=1
               fi
-            fi
-          done
+
 
           echo "$SCAN_RESULTS" > scan_results.txt
           echo "SECRET_FOUND=$SECRET_FOUND" >> $GITHUB_ENV
