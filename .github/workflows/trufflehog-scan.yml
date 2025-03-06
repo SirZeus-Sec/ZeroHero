@@ -44,7 +44,7 @@ jobs:
           for file in $CHANGED_FILES; do
             if [[ -f "$file" ]]; then
               echo "Scanning $file..."
-              RESULT=$(trufflehog --regex --entropy=True "$file" 2>&1)
+              RESULT=$(trufflehog --regex --entropy=True "$file" 2>&1 || true)
               echo "$RESULT"
               SCAN_RESULTS+="$RESULT"$'\n\n'
               
@@ -60,6 +60,7 @@ jobs:
           
           # ✅ Don't exit here - let the workflow continue
           echo "Scan completed with exit code: $EXIT_CODE"
+          return $EXIT_CODE
 
       - name: Upload Scan Results as Artifact
         if: always()
