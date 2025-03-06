@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install TruffleHog
-        run: apt install trufflehog
+        run: sudo apt install trufflehog
 
       - name: Get Changed Files in PR
         id: changed-files
