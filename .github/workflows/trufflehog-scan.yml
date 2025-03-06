@@ -60,7 +60,7 @@ jobs:
           
           # ✅ Don't exit here - let the workflow continue
           echo "Scan completed with exit code: $EXIT_CODE"
-          return $EXIT_CODE
+          exit $EXIT_CODE
 
       - name: Upload Scan Results as Artifact
         if: always()
