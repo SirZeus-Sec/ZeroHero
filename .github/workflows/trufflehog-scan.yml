@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install TruffleHog
-        run: pip install trufflehog==2.1.0
+        run: pip install trufflehog
 
       - name: Get Changed Files in PR
         id: changed-files
